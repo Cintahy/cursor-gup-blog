@@ -1,0 +1,38 @@
+{
+  "name": "cursor-gup-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "new": "esno scripts/newPost.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@iconify-json/carbon": "^1.2.5",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^18.19.71",
+    "@types/pinyin": "^2.10.2",
+    "@types/prompts": "^2.4.9",
+    "@unocss/preset-icons": "^65.4.2",
+    "dayjs": "^1.11.13",
+    "esno": "^0.16.3",
+    "gray-matter": "^4.0.3",
+    "lodash-es": "^4.17.21",
+    "pinyin": "^3.1.0",
+    "prompts": "^2.4.2",
+    "sass": "^1.83.4",
+    "unocss": "^65.4.2",
+    "vitepress": "^1.6.1",
+    "vue": "^3.5.13"
+  },
+  "dependencies": {
+    "@vueuse/core": "^12.4.0",
+    "qrcode.vue": "^3.6.0"
+  }
+}
