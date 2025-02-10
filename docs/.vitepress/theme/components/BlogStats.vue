@@ -151,15 +151,28 @@ const totalTags = computed(() => {
 // 时间进度计算
 const progressItems = computed(() => {
   const now = new Date()
-  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  const startOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + 1)
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
-  const startOfYear = new Date(now.getFullYear(), 0, 1)
   
+  // 今日进度
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const dayProgress = ((now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()) / (24 * 3600)) * 100
+  
+  // 本周进度 (周一为起点)
+  const currentDay = now.getDay() || 7 // 将周日的0转换为7
+  const weekProgress = ((currentDay - 1) * 24 * 3600 + now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()) / (7 * 24 * 3600) * 100
+  
+  // 本月进度
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
+  const monthProgress = ((now.getDate() - 1) * 24 * 3600 + now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()) / (daysInMonth * 24 * 3600) * 100
+  
+  // 本年进度
+  const startOfYear = new Date(now.getFullYear(), 0, 1)
+  const daysInYear = new Date(now.getFullYear(), 11, 31).getDate() === 31 ? 365 : 366
+  const yearProgress = (((now.getTime() - startOfYear.getTime()) / (daysInYear * 24 * 3600 * 1000))) * 100
+
   return [
     {
       name: '今日',
-      percentage: ((now.getTime() - startOfDay.getTime()) / (24 * 60 * 60 * 1000)) * 100,
+      percentage: dayProgress,
       remaining: {
         value: 24 - now.getHours(),
         unit: '小时'
@@ -167,25 +180,25 @@ const progressItems = computed(() => {
     },
     {
       name: '本周',
-      percentage: ((now.getTime() - startOfWeek.getTime()) / (7 * 24 * 60 * 60 * 1000)) * 100,
+      percentage: weekProgress,
       remaining: {
-        value: 7 - ((now.getDay() || 7) - 1),
+        value: 7 - currentDay + 1,
         unit: '天'
       }
     },
     {
       name: '本月',
-      percentage: (now.getDate() - 1) / (new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()) * 100,
+      percentage: monthProgress,
       remaining: {
-        value: new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate() - now.getDate(),
+        value: daysInMonth - now.getDate(),
         unit: '天'
       }
     },
     {
       name: '本年',
-      percentage: ((now.getTime() - startOfYear.getTime()) / (365 * 24 * 60 * 60 * 1000)) * 100,
+      percentage: yearProgress,
       remaining: {
-        value: Math.ceil((new Date(now.getFullYear() + 1, 0, 1).getTime() - now.getTime()) / (24 * 60 * 60 * 1000)),
+        value: daysInYear - Math.floor((now.getTime() - startOfYear.getTime()) / (24 * 3600 * 1000)),
         unit: '天'
       }
     }

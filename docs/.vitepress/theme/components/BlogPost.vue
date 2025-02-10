@@ -222,37 +222,110 @@ onUnmounted(() => {
 
 .post-content :deep(h1) {
   font-size: 2rem;
-  margin: 2rem 0 1.5rem;
+  margin: 2.5rem 0 1.5rem;
 }
 
 .post-content :deep(h2) {
-  font-size: 1.5rem;
-  margin: 1.8rem 0 1.2rem;
-  padding-top: 1rem;
+  font-size: 1.6rem;
+  margin: 2.2rem 0 1.2rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--vp-c-divider);
 }
 
 .post-content :deep(h3) {
-  font-size: 1.2rem;
-  margin: 1.5rem 0 1rem;
+  font-size: 1.3rem;
+  margin: 1.8rem 0 1rem;
 }
 
 .post-content :deep(p) {
-  margin: 1rem 0;
-  line-height: 1.7;
+  margin: 1.2rem 0;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: var(--vp-c-text-1);
 }
 
 .post-content :deep(img) {
   max-width: 100%;
   border-radius: 8px;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
   cursor: zoom-in;
-  transition: transform 0.3s;
 }
 
 .post-content :deep(img:hover) {
   transform: scale(1.02);
 }
 
+.post-content :deep(blockquote) {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--vp-c-brand);
+  background: var(--vp-c-bg-soft);
+  border-radius: 0 8px 8px 0;
+}
+
+.post-content :deep(blockquote p) {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-style: italic;
+}
+
+.post-content :deep(code) {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.9em;
+  background: var(--vp-c-bg-soft);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.post-content :deep(pre) {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  overflow-x: auto;
+}
+
+.post-content :deep(pre code) {
+  background: none;
+  padding: 0;
+}
+
+.post-content :deep(ul),
+.post-content :deep(ol) {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.post-content :deep(li) {
+  margin: 0.5rem 0;
+  line-height: 1.7;
+}
+
+.post-content :deep(table) {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+.post-content :deep(th),
+.post-content :deep(td) {
+  padding: 0.75rem;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.post-content :deep(th) {
+  background: var(--vp-c-bg-soft);
+  font-weight: 600;
+}
+
+/* 深色模式优化 */
+:root.dark .post-content :deep(img) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端适配 */
 @media (max-width: 768px) {
   .blog-post {
     padding: 1rem 16px;
@@ -260,6 +333,22 @@ onUnmounted(() => {
   
   .post-content {
     margin: 1.5rem 0 3rem;
+  }
+
+  .post-content :deep(h1) {
+    font-size: 1.8rem;
+  }
+
+  .post-content :deep(h2) {
+    font-size: 1.4rem;
+  }
+
+  .post-content :deep(h3) {
+    font-size: 1.2rem;
+  }
+
+  .post-content :deep(p) {
+    font-size: 1rem;
   }
 }
 </style> 
